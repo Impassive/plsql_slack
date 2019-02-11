@@ -57,7 +57,7 @@ create or replace package BODY wim_slack AS
     
     function get_user_info(user_id VARCHAR2) return PLS_INTEGER IS
         n number;
-        l_data  CLOB := q'[{"ok":"true","members":[{"id":"U095L2BBR",  "real_name": "Grainne OShea"},{"id":"U095Lkj", "real_name": "Grainne"}]}]';
+        l_data  CLOB ;
         l_content varchar2(4000);
         l_url varchar2(4000) := g_slack_userinfo_url ||'?'||'token='||g_token||'&'||'user='||user_id;       
         BEGIN      
@@ -105,10 +105,8 @@ create or replace package BODY wim_slack AS
     function get_user_id(p_email VARCHAR2) return VARCHAR2 IS
         n number;
         l_user VARCHAR2(20);
-        l_data  CLOB := q'[{"ok":"true","members":[{"id":"U095L2BBR",  "real_name": "Grainne OShea"},{"id":"U095Lkj", "real_name": "Grainne"}]}]';
-        l_content varchar2(4000);
+        l_data  CLOB ;
         l_url varchar2(4000) := g_slack_userlist_url ||'?'||'token='||g_token;
-        l_count NUMBER(3) := 0;
         BEGIN      
         apex_web_service.g_request_headers.delete;
 
